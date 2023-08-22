@@ -28,7 +28,12 @@ type (
 		funcMap       template.FuncMap   // for html render
 	}
 )
-
+// Default use Logger() & Recovery middlewares
+func Default() *Engine {
+	engine := New()
+	engine.Use(Logger(), Recovery())
+	return engine
+}
 // New is the constructor of gee.Engine
 func New() *Engine {
 	engine := &Engine{router: newRouter()}
